@@ -8,7 +8,7 @@ from hoshino import Service, R
 from .get_zhoubao_info import *
 from .get_xur_info import *
 from .get_chall_info import *
-from .get_zhu_info import *
+from .get_today_info import *
 
 
 if os.path.exists(R.img('destiny2').path):
@@ -87,27 +87,27 @@ async def chall(bot, ev):
     msg = f'命运2 试炼周报：\n图片作者：seanalpha\n{pshilian}'
     await bot.send(ev, msg)
 
-#蛛王商店功能
-@sv.on_fullmatch(('蛛王','蛛王商店','猪王'))
-async def zhu(bot, ev):
-    response = req.get(getzhuImg(sethtml4()))
+#日报功能
+@sv.on_fullmatch(('日报','命运2日报'))
+async def today(bot, ev):
+    response = req.get(gettodayImg(sethtml4()))
     ls_f = base64.b64encode(BytesIO(response.content).read())
     imgdata = base64.b64decode(ls_f)
     save_dir = R.img('destiny2').path
-    path_dir = os.path.join(save_dir,'zhuwang.jpg')
+    path_dir = os.path.join(save_dir,'today.jpg')
     file = open(path_dir,'wb')
     file.write(imgdata)
     file.close()
-    pzhuwang = ' '.join(map(str, [
-        R.img(f'destiny2/zhuwang.jpg').cqcode,
+    ptoday = ' '.join(map(str, [
+        R.img(f'destiny2/today.jpg').cqcode,
     ]))
-    msg = f'命运2 蛛王：\n图片来源：小黑盒百科\n注意小黑盒蛛王信息可能更新较慢\n{pzhuwang}'
+    msg = f'命运2 日报：{ptoday}'
     await bot.send(ev, msg)
 
 #光尘商店（为了图方便，这里直接放了一张整个赛季的商店图片）
 @sv.on_fullmatch(('光尘','光尘商店'))
 async def buy(bot, ev):
-    response = req.get("https://cdn.jsdelivr.net/gh/azmiao/picture-bed/img/buy-13.jpg")
+    response = req.get("https://global.cdn.mikupics.cn/2021/09/27/5176c95392ca9.png")
     ls_f = base64.b64encode(BytesIO(response.content).read())
     imgdata = base64.b64decode(ls_f)
     save_dir = R.img('destiny2').path
