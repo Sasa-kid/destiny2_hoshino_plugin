@@ -118,7 +118,7 @@ async def buy(bot, ev):
     pguangchen = ' '.join(map(str, [
         R.img(f'destiny2/guangchen.jpg').cqcode,
     ]))
-    msg = f'命运2 第13赛季光尘商店：\n{pguangchen}'
+    msg = f'命运2 第15赛季光尘商店：\n{pguangchen}'
     await bot.send(ev, msg)
 
 #百科后续打算做成其他形式，但目前直接放了个链接，自己去小黑盒看吧
